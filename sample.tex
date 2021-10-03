@@ -1,0 +1,800 @@
+\documentclass{article}
+\usepackage{scrextend}
+\usepackage{graphicx	}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\definecolor{linkcolor}{HTML}{002f55} % цвет ссылок
+\definecolor{urlcolor}{HTML}{002f55} % цвет гиперссылок
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
+\changefontsizes[20pt]{14pt}
+\usepackage[utf8]{inputenc}
+\usepackage[left=20mm, top=20mm, right=10mm, bottom=20mm,  nohead,nofoot]{geometry}
+\usepackage[russian]{babel}
+
+\begin{document}
+
+\part{Интегрирование на многообразиях}
+\section*{Кривые}
+Мы будем рассматривать наши кривые в пространстве $R^n$. Иногда в формулировке теоремы или утверждения нет условия на непрерывность кривой. Это не означает, что его нет, возможно оно и так подразумевается и без него утверждение становится интуитивно некорректным.
+\subsection*{Определение 1.1:}
+\begin{flushleft}
+\textbf{Непрерывная кривая} — множество точек
+$\varphi_1(t), ... , \varphi_n(t), t \in [a,b]$
+
+$A = \varphi_1(a), ... , \varphi_n(a)$
+
+$B = \varphi_1(b), ... , \varphi_n(b)$
+
+Если A = B, то кривая замкнута.
+\end{flushleft}
+\subsection*{Определение 1.2:}
+\begin{flushleft}
+$\Phi(t) = (\varphi_1(t), ... , \varphi_n(t))$ — параметризация кривой
+
+\textbf{Важный факт:} существует бесконечное кол-во способов параметризовать кривую
+\end{flushleft}
+\subsection*{Определение 1.3:}
+\begin{flushleft}
+Если для кривой выполнятеся:
+$\exists \varphi_1'(t), ... , \varphi_n'(t)$ такие, что
+
+$\varphi_1'^2(t)+ ... +\varphi_n'^2(t) > 0, t \in [a,b]$, то такую кривую называем \textbf{гладкой}
+
+Если $\varphi_1'^2(t)+ ... +\varphi_n'^2(t) = 0,$ при $t = m$, то такая точка \textbf{особенная}
+\end{flushleft}
+\subsection*{Определение 1.4:}
+\begin{flushleft}
+\textbf{Кусочно-гладкая кривая} — \textbf{непрервыная} гладкая 
+кривая, состоящая из \textbf{конечного} числа гладких кривых.
+
+\textbf{Важный факт:} не каждая кривая является спрямляемой
+\end{flushleft}
+\subsection*{Определение 1.5:}
+\begin{flushleft}
+\textbf{Спрямляемая кривая} — кривая, имеющая конечную длину.
+
+\textbf{Важный факт:} гладкая кривая всегда спрямляема
+
+\end{flushleft}
+\subsection*{Определение 1.6:}
+\begin{flushleft}
+\textbf{Натуральная параметризация} — параметризация, параметром которой выступает длина \textbf{дуги} от начала до точки на кривой.
+
+Обозначаем ее как $\Psi(s)$ , где $s$ — длина дуги
+\end{flushleft}
+\begin{figure}[h]
+\centering
+\includegraphics[width = 8cm]{кривая.jpg}
+\end{figure}
+
+\subsection*{Теорема 1.1:}
+	Для любой гладкой кривой существует натуральная параметризация.
+	
+	\textit{Без доказательства.}
+	
+\subsection*{Любопытное утверждение:}
+Если кривая гладкая и без особых точек с гладкой параметризацией 
+$\Phi(t)$ и натуральной параметризацией $\Psi(s)$ справедливо:
+\begin{center}
+$\frac{ds}{dt} = |\Phi'(t)|$
+\end{center}
+\newpage
+\subsection*{Некоторые факты:}
+Задание параметризации $(\varphi_1(t), ... , \varphi_n(t))$ определяет движение на кривой $\Gamma $от ее начальной точки к конечной, или, другими словами, определяет ориентацию кривой, называемую положительной. Если при переходе от исходной параметризации начальная и конечная точки меняются местами (в случае замкнутой кривой — меняется направление движения), то происходит смена ориентации от положительной к отрицательной. Кривую $\Gamma$ с положительной по отношению к исходной параметризации ориентацией обозначают $\Gamma^+$, с отрицательной — $\Gamma^-$.
+
+
+\section*{Криволинейные интегралы I рода}
+\subsection*{Определение 1.7:}
+	Пусть задана гладкая, спрямляемая кривая с параметризацией 
+	$\Phi(t)$
+	
+	$\Gamma: \Phi(t) , t \in [a,b]$
+	
+	Также есть натуральная параметризация:
+	
+	 $\Gamma: \Psi(s),$
+	$s \in [0 , S_\Gamma]$, в силу спрямляемости
+	
+	И пусть задана функция $F(x) , x \in \Gamma$
+	
+	Тогда \textbf{криволинейным интегралом I рода от $F$ по $\Gamma$}
+	назовем интеграл Римана:
+	
+	$$ I = \int\limits_{0}^{S_\Gamma} F(\Psi(s)) \,ds  = 
+	 \int\limits_{0}^{S_\Gamma} 	F(s) \,ds $$
+	И будем обозначать его, как 
+ 	$$I = \int\limits_{\Gamma}^{} F_0(x) \,ds$$
+\newpage
+\subsection*{Свойства криволинейных интегралов I рода}
+\subparagraph{Свойство 1:} $F(s) = 1 \Rightarrow I = S_\Gamma$
+
+\textit{Док-во:}
+	$$F(s) = 1 \Rightarrow I = \int\limits_{0}^{S_\Gamma} 1 \,ds \Rightarrow
+	I = S_\Gamma - 0 = S_\Gamma$$ читд
+
+\subparagraph{Свойство 2:} Криволинейный интеграл I рода не зависит от ориентации кривой, те $$\int\limits_{\Gamma^+}^{} F_0(x) \,ds = \int\limits_{\Gamma^-}^{} F_0(x) \,ds$$
+
+\textit{Док-во:}
+
+
+	Пусть дана кривая с натуральной параметризацией $\Psi(s),s \in [0 , S_\Gamma]$:
+	
+	$\Gamma^+: A = \Psi(0) , B = \Psi(S_\Gamma)$
+	
+	Возьмем точку $M \in [A , B]$ на кривой, тогда $M = \Psi(s)$
+	
+	Определим параметр $\sigma = S_\Gamma - s$, те $\sigma$ — расстояние от $B$ до $M$.Тогда
+
+	$$\int\limits_{\Gamma^+}^{} F_0(x) \,ds = 
+	\int\limits_{0}^{S_\Gamma} F(\Psi(s)) \,ds 
+	\stackrel{\sigma = S_\Gamma - s}{=} 
+	- \int\limits_{S_\Gamma}^{0} F(\Psi(\sigma - S_\Gamma)) \,d\sigma =  $$		 	
+	$$=\int\limits_{0}^{S_\Gamma}F(\Psi(\sigma - S_\Gamma)) \,d\sigma = 
+	\int\limits_{\Gamma^-}^{} F_0(x) \,d\sigma$$
+Тк криволинейный интеграл I рода не зависит от выбранной параметризации, то свойство 2 доказано.
+читд
+
+\subparagraph{Свойство 3:}
+Пусть $\Gamma$ есть кривая в $R^n$ с непрерывно дифференцируемой
+на отрезке $[a, b$] параметризацией $\Phi(t)$ без особых точек, тогда справедливо равенство
+$$\int\limits_{\Gamma}^{} F_0(x) \,ds = \int\limits_{a}^{b} F(\Phi(t))[\varphi_1'^2(t)+ ... +\varphi_n'^2(t)] ^ \frac{1}{2} \,dt $$
+\textit{Без доказательства}
+
+\subparagraph{Свойство 4:}
+Пусть $\tau$ = $\{s_i\}_{i = 0}^{m}$ есть разбиение отрезка $[0, S_\Gamma]$, $\xi_i$  есть
+точки из отрезков $[s_{i-1}, s_i], i = 1,...,m, \Delta s_i = s_i - s_{i-1}$  длина дуги
+кривой $\Gamma$ от точки $\Psi_0(s_{i-1})$ до точки $\Psi_0(s_i)$, $\sigma_\tau$ — интегральная сумма функции $F_0(s)$ по отрезку $[0, S_\Gamma]$
+
+$$ \sigma_\tau = \sum_{i=1}^m F_0(\Psi_0(\xi_i))\Delta s_i$$
+
+Тогда, если криволинейный интеграл I первого рода существует, то
+	\[ \lim_{max(\Delta s_i)\to 0} \sigma_\tau  = I \]
+\textit{Док-во:}
+
+	Вспомним, как мы определяли интеграл Римана. Мы составляли интегральные суммы, потом устремляли разбиение к нулю и говорили, если вот существует такой предел, то назовем его интегралом Римана. Тут у нас условие, что криволинейный интеграл I первого рода существует, значит существует интеграл Римана, значит и предел сумм есть, который как раз и равен нашему интегралу Римана.
+
+\subparagraph{Свойство 5:}
+Если функция $F(x)$ представляет собой комбинацию
+$\alpha F_1(x) + \beta F_2(x)$, $\alpha, \beta$ — фиксированные числа, криволинейные интегралы по кривой $\Gamma$ от функций $F_1(x)$ и $F_2(x$) существуют, то выполняется
+равенство.
+
+	$$\int\limits_{\Gamma}^{} F_0(x) \,ds 
+	= 
+	\alpha \int\limits_{\Gamma}^{} F_1(x) \,ds + 
+	\beta \int\limits_{\Gamma}^{} F_2(x) \,ds $$
+
+\textit{Док-во:}
+$$
+	\int\limits_{\Gamma}^{} F_0(x) \,ds
+=
+ 	\int\limits_{0}^{S_\Gamma} F(\Psi(s)) \,ds 
+=
+	\int\limits_{0}^{S_\Gamma} \alpha F_1(\Psi(s))+ \beta F_2(\Psi(s))\,ds =
+$$
+$$
+	\int\limits_{0}^{S_\Gamma} \alpha F_1(\Psi(s)) \,ds + 
+	\int\limits_{0}^{S_\Gamma} \beta F_2(\Psi(s)) \,ds 
+= 
+	\alpha \int\limits_{0}^{S_\Gamma}  F_1(\Psi(s)) \,ds +  
+	\beta \int\limits_{0}^{S_\Gamma}  F_2(\Psi(s)) \,ds 
+=
+$$
+$$
+	\alpha \int\limits_{\Gamma}^{}  F_1(x) \,ds +  
+	\beta \int\limits_{\Gamma}^{}  F_2(x) \,ds 
+$$
+читд
+	
+	Вообщем сводим криволинейный интеграл к интегралу Римана, а там эти свойства уже доказаны в прошлом семестре.
+
+	
+\subsection*{Определение 1.8:}	
+\textbf{Криволинейным интегралом по кусочно-гладкой кривой} $\Gamma$ называется число
+
+\begin{equation}\label{eq1}
+\int\limits_{\Gamma_1}^{} F_0(x)\,ds  + \int\limits_{\Gamma_2}^{} F_0(x)\,ds
+\end{equation}
+
+если каждый из криволинейных интегралов по $\Gamma_1$ и $\Gamma_2$ существуют.
+	
+	
+\textbf{Замечание} Поскольку понятие определенного интеграла
+ $$\int\limits_{a}^{b} F(x)\,dx $$
+по отрезку можно расширить — например, до несобственного интеграла от
+неограниченных функций или по неограниченному промежутку — то и понятие криволинейного интеграла первого рода можно расширить, определив несобственный криволинейный интеграл первого рода, или же перейти
+к какой-либо иной конструкции, расширяющей понятие обычного определенного интеграла.	
+	\newpage	
+	
+\section*{Криволинейные интегралы II рода}	
+Пусть $\Gamma$ есть кривая, параметризованная непрерывно-дифференцируемой
+на отрезке $[a, b]$ вектор-функцией $\Phi(t)$, и пусть эта кривая не имеет особых
+точек. Тогда, во-первых, в каждой точке $\Phi(t)$ определена касательная к  $\Gamma$,
+и, во-вторых, от параметризации $\Phi(t)$ можно перейти к эквивалентной ей
+натуральной параметризации $\Psi(s$). Обозначим через $cos \alpha_k, k = 1,...,n,$
+направляющие косинусы единичного вектора $\vec{l} = \vec{l}(t)$ касательной к $\Gamma$ в
+текущей точке (другими словами, искомый вектор $\vec{l}$ задается равенством 
+$\vec{l} = (cos \alpha_1,..., cos \alpha_n) $и $\alpha_k, k = 1,...,n,$ есть углы между вектором $\vec{l}$
+и положительным направлением соответствующей оси $Ox_k)$. 
+
+\subsection*{Определение 1.9:}	
+	Пусть задана функция $F_0(x)$, определенная при $x \in \Gamma$, 
+
+и пусть $ F_0(s)$ = $F(\Psi(s))$.(Я тут переобозначил $F$ и $F_0$,так как это было в интегралах I рода, ибо можно запутаться, когда $F$ и $F_0$  меняются местами просто так)
+
+Тогда \textbf{криволинейным интегралом второго рода по кривой $\Gamma$ от функции F(x)} по координате $x_k,$ $ k = 1,...,n,$ называется интеграл:
+
+	$$I = \int\limits_{\Gamma}{} F_0 * cos \alpha_k d{s},$$
+	если последний существует
+	
+	Обозначают как:
+	
+		$$I = \int\limits_{\Gamma}{} F_0 d{x_k},$$
+	\newpage
+\subsection*{Определение 1.10:}
+	Область $G$ из пространства $R^2$ называется \textbf{элементарной относительно оси $Oy$}, если ее граница состоит из графиков двух непрерывных функций $\phi(x)$ и $\psi(x)$, определенных при
+$x \in [a, b]$ и таких, что $\phi(x)	\leq \psi(x)$ для всех $x$, а также, быть
+может, из некоторых отрезков прямых $x = a$ и $x = b$.
+
+
+\includegraphics[width = 8cm]{oy.jpg}
+\includegraphics[width = 8cm]{oy_1.jpg}
+
+\subsection*{Определение 1.11:}
+	Область $G$ из пространства $R^2$ называется \textbf{элементарной относительно оси $Ox$} областью, если ее граница состоит из графиков двух непрерывных функций $\alpha(y)$ и $\beta(y)$, определенных при
+$y \in [c, d]$ и таких, что $\alpha(y)	\leq \beta(y)$ для всех $y$, а также, быть
+может, из некоторых отрезков прямых $y = c$ и $y = d$.
+
+
+\includegraphics[width = 8cm]{ox.jpg}
+\includegraphics[width = 8cm]{ox_1.jpg}
+\newpage
+\subsection*{Замечание:}
+	Группы Шваб идут по Крючковичу, у которого такие области называются \textbf{простыми} и, к тому же, оси меняются местами.
+	
+	
+\includegraphics[width = 18cm]{крючкович_x.jpg}
+
+\includegraphics[width = 18cm]{крючкович_y.jpg}
+\newpage
+\subsection*{Формула Грина:}
+	Пусть $D$ есть ограниченная область из пространства $R^2$
+с кусочно-гладкой границей $\Gamma$, ориентированной положительно, и пусть
+эту область можно разбить на конечное число непересекающихся элементарных областей с кусочно-гладкими положительно-ориентированными границами. Далее, пусть $P(x, y)$ и $Q(x, y)$ есть заданные функции
+такие, что 
+
+1)  $P$ и $Q$ непрерывны в замкнутой области $D$
+
+
+2) $P$ и $Q$ имеют непрерывные частные производные $\frac{\partial Q}{\partial x},\frac{\partial P}{\partial y} $ в замкнутой $D$
+
+тогда верна формула Грина:
+
+\begin{equation}\label{eq3}
+	\int\limits_D \int (\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}) dxdy =
+	\oint\limits_{\Gamma} (Pdx + Qdy)
+\end{equation}
+\textit{Док-во для элементарной(и по $Ox$, и по $Oy$) $D$:} 
+
+	Сведем двойной интеграл к повторному и применим формулу Ньютона-Лейбница:
+$$
+\int\limits_D \int \frac{\partial Q}{\partial x} dxdy = 
+\int\limits_{c}^d dy \int\limits_{\alpha(y)}^{\beta(y)}\frac{\partial Q}{\partial x}dx = 
+\int\limits_{c}^d  Q(x,\beta(y) - Q(x,\alpha(y))dy =
+$$
+
+$$
+\int\limits_{c}^d  Q(x,\beta(y)dy -\int\limits_{c}^d Q(x,\alpha(y))dy
+$$  
+\includegraphics[width = 10cm]{грин.jpg}	
+
+Мы можем параметризовать наши кривые 
+
+	$
+	\gamma_1: \alpha(t) , t \in [c , d].
+	$
+	
+	$
+	\gamma_2: \beta(t) , t \in [c , d].
+	$
+	
+	$
+	\gamma_3:  y = c, x = t , t \in [\alpha(c) , \beta(c)].
+	$
+	
+	$
+	\gamma_4:  y = d, x = t , t \in [\alpha(d) , \beta(d)].	
+	$
+	
+	
+
+
+Перепишем наши интегралы как криволинейные. Не забываем, что есть разница в направлении кривой!!!
+
+$$
+\int\limits_{\gamma_1}  Q(x,y)dx -\int\limits_{\gamma_2^-} Q(x,y)dy
+= \int\limits_{\gamma_1}  Q(x,y)dx + \int\limits_{\gamma_2} Q(x,y)dy
+$$  
+Заметим, что
+$$ 
+\int\limits_{\gamma_3}  Q(x,y)dy = \int\limits_{\gamma_4} Q(x,y)dy = 0
+$$
+У нас получился интеграл по замкнутому контуру
+$$ 
+\int\limits_{\gamma_1}  Q(x,y)dy + \int\limits_{\gamma_2} Q(x,y)dy +
+\int\limits_{\gamma_3}  Q(x,y)dy = \int\limits_{\gamma_4} Q(x,y)dy = 
+\oint\limits_{\Gamma} Qdy
+$$
+$$
+\int\limits_D \int\frac{\partial Q}{\partial x}dxdy = 
+\oint\limits_{\Gamma} Qdy
+$$
+
+Аналогично:
+$$
+\int\limits_D \int\frac{\partial P}{\partial y}dxdy = 
+-\oint\limits_{\Gamma} Pdx
+$$
+Складывая, получаем:
+$$
+\int\limits_D \int( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} )dxdy =
+\oint\limits_{\Gamma} (Pdx + Qdy)
+$$
+читд
+
+
+\textit{Док-во, если $D$ состоит из мн-ва непересекающихся, ненулеых элементарных областей:}
+
+$
+D = D_1 \cup D_2 \cup ... \cup D_m $ при $ D_i \cap D_j \neq  \varnothing, i \neq j
+$
+В силу свойства аддитивности двойного интеграла и факта, что граница области имеет нулевую меру:
+$$
+\int\limits_D \int (\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}) dxdy
+=
+\sum_{i=1}^{m} \int\limits_{D_i} \int (\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}) dxdy
+$$
+Применяя теперь для каждого слагаемого в правой части данного равенства доказанную выше формулу, получим
+$$
+\int\limits_D \int (\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}) dxdy
+= 
+\sum_{i=1}^{m} \oint\limits_{D_i} (Pdx + Qdy) 
+$$
+В сумме, стоящей справа, содержатся интегралы по положительно ориентированным частям границ областей $D_i$, составляющим в целом границу $D$,
+а также содержатся интегралы по тем частям границ областей  $D_i$, которые
+лежат внутри  $D$, причем эти интегралы берутся дважды по одинаковым
+кривым, но с противоположной ориентацией — в силу свойств криволинейных интегралов второго рода они взаимно уничтожаются. В результате
+суммирования как раз и получится требуемое равенство.
+
+читд
+\subsection*{Замечание:}
+Может возникнуть вопрос, что это за странная запись такая? 
+$$
+\oint\limits_{\Gamma}(Pdx + Qdy)
+$$
+
+Ведь у нас никогда не было, что разные функции интегрируются по разным переменным в одном интеграле. Можно это понимать так: Мы хотим вычислить силу, поэтому интегрируем работу по составляющим, где $P$ $x$-составляющая, $Q$ $y$-составляющая.
+	
+Или просто воспринимайте его как сумму:
+$$
+\oint\limits_{\Gamma} (Pdx + Qdy) =
+\oint\limits_{\Gamma}Pdx + \oint\limits_{\Gamma} Qdy
+$$
+
+\subsection*{Замечание:}
+	Не обязательно писать именно интеграл по замкнутой кривой, можно просто интеграл. Просто два нулевых интеграла нам дают такую возможность.
+\newpage
+
+\subsection*{Определение 1.12:}
+	Зададим $(m+1)$ гладкие, замкнутые кривые $\Gamma_0 , \Gamma_1$ ...$\Gamma_m $
+	
+	Пусть $\Gamma_0$ - граница области $G$ 
+	и $\Gamma_i \cap \Gamma_j = \varnothing$ при $ i \neq j$
+	
+	$\Gamma_i$ - граница области $G_i$, $\Gamma_i \in G$ ,  $i = 1$ ...$ m$
+	
+	Тогда $G \setminus (G_1 \cup G_2 \cup$...$\cup G_m)$ - $(m+1)$-связная область
+	
+\includegraphics[width = 10cm]{связная_область.jpg}
+
+Заметим, что при таком задании ориентации границы $(m + 1)$-связной
+области кривые $\Gamma_i$, $i = 1,...,m$, будут ориентированы отрицательно по
+отношению к ограниченным областям $G_i$, кривые же $\Gamma_i^-$ , наоборот, будут
+положительно ориентированы по отношению к $G_i$.
+
+\subsection*{Формула Грина для многосвязных областей:}
+	Пусть область $G$ $(m + 1)$-связна, ее внешний и внутренние контуры $\Gamma_0$, $\Gamma_1,$...$, \Gamma_m$ являются замкнутыми кусочно-гладкими
+кривыми без самопересечений, и пусть граница области $G$ положительно ориентирована. Далее, пусть $P(x, y)$ и $Q(x, y)$ есть заданные функции
+такие, что
+
+1)  $P$ и $Q$ непрерывны в замкнутой области $G$
+
+
+2) $P$ и $Q$ имеют непрерывные частные производные $\frac{\partial Q}{\partial x},\frac{\partial P}{\partial y} $ в замкнутой $G$
+
+Тогда имеет место равенство
+\begin{equation}\label{eq3}
+\int\limits_G \int (\frac{\partial Q}{\partial x} 
+-
+\frac{\partial P}{\partial y}) dxdy 
+=
+\int\limits_{\Gamma_0} (Pdx + Qdy)
+-
+\sum_{i = 1}^m \int\limits_{\Gamma_i^-} (Pdx + Qdy)
+\end{equation}
+
+\textit{Док-во для двусвязной области $G$:}
+
+
+Соединим область $G_1$ с кривой $\Gamma_0$ разрезом, который представляет собой кусочно-гладкую кривую без самопересечений. Обозначим разрез как $L$
+
+\includegraphics[width = 8cm]{многосвязная.jpg}
+
+Обозначим через $G^*$ область, полученную из $G$ удалением данного разреза, предполагая, что граница области $G^*$ состоит из границы $G$ (с сохранением ориентации) и разреза, проходимого дважды.Граница $G^*$ представляет собой кусочно-гладкую кривую, а значит по Формуле Грина для односвязной области имеем:
+
+$$
+\int\limits_{G^*} \int (\frac{\partial Q}{\partial x} 
+-
+\frac{\partial P}{\partial y}) dxdy 
+=
+\int\limits_{\delta G^*} (Pdx + Qdy)
+$$	
+Далее, поскольку двойной интеграл не меняется при присоединении к множеству интегрирования множества нулевой двумерной меры, то имеет место равенство
+$$
+\int\limits_{G^*} \int (\frac{\partial Q}{\partial x} 
+-
+\frac{\partial P}{\partial y}) dxdy 
+=
+\int\limits_{\delta G} (Pdx + Qdy)
+= 
+\int\limits_{G} \int (\frac{\partial Q}{\partial x} 
+-
+\frac{\partial P}{\partial y}) dxdy 
+$$
+
+Заметим, что $\delta G = \Gamma_0 \cup L \cup \Gamma_1$, вспомниая определение (\ref{eq1}) интеграла по кусочно-гладкой кривой:
+$$
+\int\limits_{\delta G} (Pdx + Qdy)
+=
+\int\limits_{\Gamma_0} (Pdx + Qdy)
++
+\int\limits_{L^+} (Pdx + Qdy)
++
+\int\limits_{L^-} (Pdx + Qdy)
++
+\int\limits_{\Gamma_1} (Pdx + Qdy)
+$$
+Учитывая, что направление движения по кривой имеет значение:
+$$
+\int\limits_{G} \int (\frac{\partial Q}{\partial x} 
+-
+\frac{\partial P}{\partial y}) dxdy 
+=
+\int\limits_{\delta G} (Pdx + Qdy)
+=
+\int\limits_{\Gamma_0} (Pdx + Qdy)
+-
+\int\limits_{\Gamma_1^-} (Pdx + Qdy)
+$$
+Таким образом, мы получили формулу (\ref{eq3}) для случая двусвязной области $G$
+
+Что будет в случае, если $G$ - $(m+1)$-связная область?
+Да то же самое, только 
+$\delta G = \Gamma_0 \cup (L_1 \cup$ ... $ \cup L_m)\cup (\Gamma_1 \cup$ ... $\cup\Gamma_m)$
+$$
+\int\limits_{\delta G} (Pdx + Qdy)
+=
+\int\limits_{\Gamma_0} (Pdx + Qdy)
++
+\sum_{i = 1}^m (\int\limits_{L_i^+}(Pdx + Qdy) - \int\limits_{L_i^-} (Pdx + Qdy))
+-
+\sum_{i = 1}^m \int\limits_{\Gamma_i^-} (Pdx + Qdy)
+$$
+Отсюда немедленно получаем
+$$
+\int\limits_{\delta G} (Pdx + Qdy)
+=
+\int\limits_{\Gamma_0} (Pdx + Qdy)
+-
+\sum_{i = 1}^m \int\limits_{\Gamma_i^-} (Pdx + Qdy)
+$$
+читд
+
+\subsection*{Теорема 1.2}
+
+Пусть
+
+1)  $P$ и $Q$ непрерывны в замкнутой, связной области $G$
+
+
+2) $P$ и $Q$ имеют непрерывные частные производные $\frac{\partial Q}{\partial x},\frac{\partial P}{\partial y} $ в замкнутой $G$
+
+тогда 4 свойства эквивалентны:
+
+
+1) Независимость $P(x,y)$, $Q(x,y)$ от пути интегрирования в $G$
+
+2) Для любой замкнутой кусочно-гладкой кривой $\Gamma$, целиком лежащей в $G$, выполняется
+$$
+\int\limits_{\Gamma} (Pdx + Qdy) = 0
+$$
+
+3) Существует функция $u(x, y$) такая, что для любых 
+точек $(x, y)$ из $G$ выполняется
+
+$$
+du(x, y) = P(x, y) dx + Q(x, y) dy;
+$$
+
+4) Для любых точек $(x, y)$ из $G$ выполняется
+$$
+\frac{\partial Q(x,y)}{\partial x} = \frac{\partial P(x,y)}{\partial y} 
+$$
+
+\newpage
+\textit{Док-во:} 
+$(1 \Rightarrow 2)$
+$$
+\int\limits_{\Gamma_1} (Pdx + Qdy) 
+=
+\int\limits_{\Gamma_2} (Pdx + Qdy) 
+$$
+$$
+\int\limits_{\Gamma_1} (Pdx + Qdy) 
+-
+\int\limits_{\Gamma_2} (Pdx + Qdy) 
+=
+0
+$$
+$$
+\int\limits_{\Gamma_1} (Pdx + Qdy) 
++
+\int\limits_{\Gamma_2^-} (Pdx + Qdy) 
+=
+0
+$$
+\includegraphics[width = 8cm]{4экв.jpg}	
+
+В силу того, что $\Gamma = \Gamma_1 \cup \Gamma_2^-$(с учетом направления):
+$$
+\int\limits_{\Gamma} (Pdx + Qdy) 
+=
+\int\limits_{\Gamma_1} (Pdx + Qdy) 
++
+\int\limits_{\Gamma_2^-} (Pdx + Qdy) 
+=
+0
+$$
+
+В силу произвольности выбора $\Gamma_1$ и $\Gamma_2$ получаем, что $\Gamma$ - тоже произвольная кривая.
+
+
+$(2 \Rightarrow 1)$
+
+	Пусть $\Gamma$ - замкнутая кусочно-гладкая кривая
+	и выполняется $\int\limits_{\Gamma} (Pdx + Qdy) = 0$
+	
+Разобьем(с учетом направления) $\Gamma = \Gamma_1 \cup \Gamma_2$, где $\Gamma_1$ и $\Gamma_2$ - кусочно-гладкие или просто гладкие кривые.
+Тогда:
+$$
+\int\limits_{\Gamma} (Pdx + Qdy) 
+=
+\int\limits_{\Gamma_1} (Pdx + Qdy) 
++
+\int\limits_{\Gamma_2} (Pdx + Qdy) 
+=
+0
+$$
+Отсюда:
+$$
+\int\limits_{\Gamma_1} (Pdx + Qdy) 
+=
+\int\limits_{\Gamma_2^-} (Pdx + Qdy) 
+$$
+\newpage
+$(1 \Rightarrow 3)$\textbf{Надо еще исправлять}
+Пусть $M_0 = (x_0, y_0)$ есть фиксированная точка $G$, $M = (x^*, y^*)$ есть текущая точка $G$, $\Gamma : M_0M$ есть кусочно-гладкая кривая без самопересечений,
+целиком лежащая в $G$ и соединяющая точки $M_0$ и $M$.
+Пусть 
+$$
+u(x,y) = \int\limits_{M_0M} (Pdx + Qdy) 
+=
+\int\limits_{\Gamma} (Pdx + Qdy) 
+$$
+В силу условия \hyperref[eq4]{связности} $G$:
+$ \exists h : (x^* + h , y^*) \in G$
+
+Пусть прямая L, прямая соединяющая $M(x^* , y^*)$ и $M^*(x^* + h , y^*)$
+
+Покажем, что 
+
+$$u_x = \lim_{h \to 0}\frac{u(x^* + h , y^*) - u(x^* , y^*)}{h} = P(x^* , y^*) $$
+\includegraphics[width = 13cm]{Т1.2.jpg}	
+
+Имеем
+$$
+\frac{u(x^* + h , y^*) - u(x^* , y^*)}{h} 
+= 
+\frac{1}{h}(u(x^* + h , y^*) - u(x^* , y^*))
+$$
+$$
+=
+\frac{1}{h} \int\limits_{M}^{M^*} (Pdx + Qdy)
+=
+\frac{1}{h} \int\limits_{L} (Pdx + Qdy)
+$$
+Параметризуем отрезок L:
+
+	$x = x^* + th , t \in [0,1] \Rightarrow dt = dx$
+	
+	$y = y^* \Rightarrow dy = 0$
+$$
+\int\limits_{L} (P(x,y)dx + Q(x,y)dy) = \int\limits_{0}^{1}P(x^* + th,y^*)dt
+=
+P(x^* + h,y^*) - P(x^*,y^*)
+$$	
+Применим формулу \hyperref[eq5]{конечных приращений Лагранжа}
+$$
+P(x^* + h,y^*) - P(x^*,y^*) = P(x^* + \theta h,y^*)h  ,\theta \in (0,1)
+$$
+Отсюда:
+	
+$$
+P(x^* + \theta h,y^*) 
+=
+\frac{u(x^* + h , y^*) - u(x^* , y^*)}{h}
+$$
+Теперь при $h \to 0$	 получаем:
+
+$$
+P(x^* , y^*) 
+=
+u_x
+$$
+Аналогично доказываем, что $Q(x^* , y^*) = u_y$
+
+$$
+du(x^* , y^*) = u_x dx + u_y dy = P(x^* , y^*) dx + Q(x^* , y^*) dy
+$$
+Но нам нужно еще доказать дифференцируемость $u(x,y)$ в $G$
+
+$u_x = P(x , y)$
+$u_y = Q(x , y)$
+
+Тк по условию у нас $P$ и $Q$ имеют непрерывные частные производные $\frac{\partial Q}{\partial x},\frac{\partial P}{\partial y} $ в замкнутой $G$, то существую вторые производные для $u(x,y)$, отсюда немедленно следует дифференцируемость$u(x,y)$
+читд	
+	
+$(3 \Rightarrow 1)$	
+
+\textbf{Одно звено} : $M_0(x_0 , y_0)$ и $M(x^* , y^*)$ 
+
+\includegraphics[width = 13cm]{1.jpg}
+$$
+\int\limits_{\Gamma} (Pdx + Qdy) 
+=
+\int\limits_{\Gamma} (u_xdx + u_ydy) 
+$$
+
+Параметризуем $\Gamma$:
+
+ $ x = \varphi(t)$
+ 
+ $ y = \psi(t)$ , где $t \in [\alpha , \beta]$
+$$
+\int\limits_{\Gamma} (Pdx + Qdy)
+=шо
+\int\limits_{\alpha}^{\beta} P(\varphi'(t) , \psi'(t))*\varphi'(t)dt 
++ Q(\varphi'(t) , \psi'(t))*\psi'(t)dt 
+=
+$$
+$$
+\int\limits_{\alpha}^{\beta} \frac{d}{dt}(u(\varphi(t) ,\psi(t)))dt 
+= 
+u(\varphi(\beta) ,\psi(\beta)) -  u(\varphi(\alpha) ,\psi(\alpha))
+$$
+Получается, что интеграл зависит лишь от начальных точек, а значит не зависит от пути интегрирования
+
+Если \textbf{n звеньев:}
+
+\includegraphics[width = 13cm]{n.jpg}	
+
+$$
+u(x_1 , y_1) - u(x_0 , y_0) 
++ 
+u(x_2 , y_2) - u(x_1 , y_1)
++ 
+u(x_3 , y_3) - u(x_2 , y_2)
++ ... +
+u(x^* , y^*) - u(x_{n-1} , y_{n-1})
+=
+$$
+$$
+=
+u(x^* , y^*) - u(x_0 , y_0)
+$$
+Получается, что и от количества звеньев не завсисит
+
+читд
+
+$(3 \Rightarrow 4)$
+$$
+u_{xy}(x,y) = \frac{\partial P}{\partial y} = P_y
+$$
+$$
+u_{yx}(x,y) = \frac{\partial Q}{\partial x} = Q_x
+$$
+В силу непрерывности $P_y , Q_y$, получается, что и
+$u_{xy}(x,y), u_{yx}(x,y)$ непрерывны в $G$. А если если существуют смешанные непрерывные производные, то они равны.
+
+\hyperref[eq6]{Теорема о смешанных производных}
+$$
+u_{xy} = u_{yx} \Rightarrow Q_x = P_y
+$$
+
+читд
+
+$(4 \Rightarrow 2  \Rightarrow 3)$
+	Пусть $P_y = P_y$
+
+Рассмотрим кусочно-гладкую замкнутую кривую в замкнутой $G$
+
+Тогда справедлива формула Грина:
+$$
+\int\limits_{\Gamma} (Pdx + Qdy)
+=
+\int\limits_{G} \int (\frac{\partial Q}{\partial x} 
+- 
+\frac{\partial P}{\partial y}) dxdy
+=
+0
+$$
+Отсюда получаем свойство 2:
+$$
+\int\limits_{\Gamma} (Pdx + Qdy)
+=
+0
+$$
+Ранее уже доказали, что $(2 \Rightarrow 3)$
+
+читд
+
+\newpage
+\section*{Полезности}
+\subsection*{Связная область}\label{eq4}
+Определение. Пусть задана область $E$, т.е. множество, состоящее из внутренних точек. Множество $E$ называется связным, если любые две точки этого
+множества можно соединить ломаной, целиком лежащей в этой области.
+
+\subsection*{Формула конечных приращений Лагранжа}\label{eq5}	
+Если функция $F$ непрерывна на отрезке $[a,b]$  и дифференцируема в интервале $(a,b)$, то найдётся такая точка $ c\in (a,b)$, что
+ 
+	$F(a) - F(b) = F'(c)(b - a)$
+	
+	Можно записать так:
+	
+	$F(x + \Delta x) - F(x) = F'(x + \theta\Delta x)\Delta x , \theta \in (0,1) $
+
+\subsection*{Теорема о смешанных производных}\label{eq6}
+\includegraphics[width = 20cm]{CP.jpg}	
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
