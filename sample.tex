@@ -5,6 +5,7 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{wrapfig}
 \definecolor{linkcolor}{HTML}{002f55} % цвет ссылок
 \definecolor{urlcolor}{HTML}{002f55} % цвет гиперссылок
 \hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
@@ -291,7 +292,9 @@ $$
 $$
 \int\limits_{c}^d  Q(x,\beta(y))dy -\int\limits_{c}^d Q(x,\alpha(y))dy
 $$  
-\includegraphics[width = 10cm]{грин.jpg}	
+\begin{wrapfigure}{r}{9cm}
+\includegraphics[width = 9cm]{грин.jpg}	
+\end{wrapfigure}
 
 Мы можем параметризовать наши кривые 
 
@@ -310,8 +313,9 @@ $$
 	$
 	\gamma_4:  y = d, x = t , t \in [\alpha(d) , \beta(d)].	
 	$
-	
-	
+\newpage
+
+
 
 
 Перепишем наши интегралы как криволинейные. Не забываем, что есть разница в направлении кривой!!!
@@ -430,10 +434,13 @@ $$
 
 \textit{Док-во для двусвязной области $G$:}
 
+\begin{wrapfigure}{r}{8cm}
+\includegraphics[width = 8cm]{многосвязная.jpg}
+\end{wrapfigure}
 
 Соединим область $G_1$ с кривой $\Gamma_0$ разрезом, который представляет собой кусочно-гладкую кривую без самопересечений. Обозначим разрез как $L$
 
-\includegraphics[width = 8cm]{многосвязная.jpg}
+
 
 Обозначим через $G^*$ область, полученную из $G$ удалением данного разреза, предполагая, что граница области $G^*$ состоит из границы $G$ (с сохранением ориентации) и разреза, проходимого дважды.Граница $G^*$ представляет собой кусочно-гладкую кривую, а значит по Формуле Грина для односвязной области имеем:
 
@@ -764,7 +771,7 @@ $$
 читд
 
 \section{Поверхности в $R^n$}
-\subsection*{Опрделение 1.13 }
+\subsection*{Определение 1.13 }
 
 Пусть $G$ есть ограниченная область из пространства $R^2$,
 $f(u, v),g(u, v), h(u, v)$ — определенные при $(u, v) \in G$ и непрерывные
@@ -897,7 +904,7 @@ $$
 \subsection*{Свойства поверхностных интегралов I рода:}
 	1) Линейность
 $$
-\int\limits_{S} (\alpha F_1 + \beta F_2)dS
+\int\limits_{S} (\alpha F_1 + \beta F_2)ds
 =
 \alpha\int\limits_{S}  F_1ds
 +
@@ -908,12 +915,86 @@ $$
 \int\limits_{S}  F_2ds
 +
 \int\limits_{S}  F_1ds
+$$
+
+
+
+\subsection*{Поверхностный интеграл II рода}
+\subsection*{Некторые факты про нормаль}
+
+	Пусть есть поверхность $S$ с заданной параметризацией $\Phi(u,v)$ , где $(u,v)$ из замкнутой области $\Omega$. Если $\vec{n}$ - нормаль, вычисляемая по (\ref{eq8}), то единичная нормаль будет вычисляться так:
+	$$\vec{V} = \frac{\vec{n}}{|n|}$$
+
+\begin{wrapfigure}{r}{7.5cm}
+\includegraphics[width = 7.5cm]{косинусы.jpg}
+\end{wrapfigure}	
 	
+Однако единичную нормаль можно задать по-другому:
+
+Пусть $\vec{n} = (n_x , n_y , n_z)$
+
+Тогда 
+$$
+n_x = |n|cos\alpha;
+$$
+$$
+n_y = |n|cos\beta;
+$$
+$$
+n_z = |n|cos\gamma;
+$$
+...
+
+Тогда вектор 
+$$
+(cos\alpha , cos\beta , cos\gamma) = (\frac{n_x}{|n|} , \frac{n_y}{|n|} , \frac{n_z}{|n|})
+$$
+А это не что иное как нормированный вектор $\vec{n}$, те $\vec{V}$
+
+\subsection*{Определение 1.23:}
+\textbf{	Поверхностным интегралом второго рода по поверхности $S$ по переменным $x,y$ назовем}
+$$
+\int\limits_{S}\int \Psi dxdy 
+=
+\int\limits_{S^+}\int \Psi dxdy 
+=
+\int\limits_{S} \Psi cos\gamma ds 
+$$
+	
+Соотвествено, если интеграл по $y , z$ будет такой же, но с $cos\alpha$
+
+\textbf{Замечание:}
+$$
+\int\limits_{S^+}\int \Psi dxdy 
+=
+-\int\limits_{S^-}\int \Psi dxdy
+$$
+
+\subsection*{Свойства поверхностных интегралов II рода}
+	1) Линейность
+	
+	2) Аддитивность
+	
+	3) Зависимость от стороны поверхность(замечание выше)
+
+\subsection*{Определение 1.24}
+	Пусть $S$ есть кусочно-гладкая поверхность, состоящая из частей $S_1,...,
+S_m$, и пусть на $S$ имеется согласованная ориентация $S^+$. Далее, пусть на $S$
+задана функция $F(x, y, z)$. \textbf{Поверхностным интегралом второго рода по поверхности $S^+$ по координатам $x, y$ называется сумма}:
+$$
+I
+=
+\sum_{i = 1}^{m} \int\limits_{S_i^+}\int F dxdy 
+$$
+
+Для $dxdz , dydz$ определяется аналогично. 
+
+
 
 \subsection*{Формула Гаусса-Остроградского:}
 \textbf{Обозначаю: $R = R(x, y ,z) , Q = Q(x,y,z) , P = P(x,y,z)$;}
 
-		Пусть $V$ есть ограниченная область из пространства $R^3$, и $V$ можно разбить кусочно-гладкими поверхностями на конечное число элементарных областей. Далее, пусть $P(x, y ,z)$ и $Q(x, y ,z)$ есть заданные функции
+		Пусть $V$ есть ограниченная область из пространства $R^3$, и $V$ можно разбить кусочно-гладкими поверхностями на конечное число элементарных областей. Далее, пусть $P(x, y ,z)$, $Q(x, y ,z)$ и $R(x,y,z)$ есть заданные функции
 такие, что 
 
 1)  $P$, $Q$ и $R$ непрерывны в замкнутой области $V$
@@ -928,32 +1009,38 @@ $$
 =
 \int\limits_{\delta V}\int (Pcos\alpha + Qcos\beta + Rcos\gamma)ds
 $$
-в которой $(cos\alpha, cos\beta, cos\gamma)$ есть направляющие косинусы вектора внешней нормали к границе $\delta V$ области $V$
+в которой $(cos\alpha, cos\beta, cos\gamma)$ есть направляющие косинусы вектора \textbf{внешней} нормали к границе $\delta V$ области $V$
+
+\textit{Док-во для элементарной $\Omega$:}
+
+	Коль $\Omega$ элементарна, значит и по $Oz$ элементарна, а значит
+	$\varphi(x,y) \leq z \leq \psi(x,y)$
+
+	Рассмотрим 
+	$$\int\int\limits_{V}\int R_z(x,y,z)$$
 
 
+Тк $V$ элементарна по $Oz$:
+$$
+\int\int\limits_{V}\int R_z(x,y,z) dxdxydz
+=
+\int\limits_{\Omega}\int(\int_{\varphi(x,y)}^{\psi(x,y)} R_z(x,y,z)dz) dxdy
+=
+$$
+$$
+=
+\int\limits_{\Omega}\int (R(x,y,\psi(x,y)) - R(x,y,\varphi(x,y)))dxdy
+$$
 
+Тк $\varphi(x,y) \leq z \leq \psi(x,y)$
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+\begin{figure}
+\begin{center}
+\includegraphics[width = 12cm]{Гаусс-Остроградский.jpg}
+\caption{Упрощенный рисунок с $V$, элементарной по $Oz$}
+\end{center}
+\end{figure}
 
 
 
