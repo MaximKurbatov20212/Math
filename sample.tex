@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{amsmath}
 \usepackage{wrapfig}
+\usepackage{tocloft}
 \definecolor{linkcolor}{HTML}{002f55} % цвет ссылок
 \definecolor{urlcolor}{HTML}{002f55} % цвет гиперссылок
 \hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
@@ -17,7 +18,7 @@
 
 \begin{document}
 \tableofcontents
-\setcounter{tocdepth}{4}
+\setcounter{tocdepth}{5}
 \newpage
 
 \part{Интегрирование на многообразиях}
@@ -951,8 +952,8 @@ $$
 $$
 А это не что иное как нормированный вектор $\vec{n}$, те $\vec{V}$
 
-\subsection*{Определение 1.23:}
-\textbf{	Поверхностным интегралом второго рода по поверхности $S$ по переменным $x,y$ назовем}
+\subsection*{Определение 1.23:}\label{eq9}
+\textbf{	Поверхностным интегралом II рода по поверхности $S$ по переменным $x,y$ назовем}
 $$
 \int\limits_{S}\int \Psi dxdy 
 =
@@ -981,6 +982,7 @@ $$
 	Пусть $S$ есть кусочно-гладкая поверхность, состоящая из частей $S_1,...,
 S_m$, и пусть на $S$ имеется согласованная ориентация $S^+$. Далее, пусть на $S$
 задана функция $F(x, y, z)$. \textbf{Поверхностным интегралом второго рода по поверхности $S^+$ по координатам $x, y$ называется сумма}:
+
 $$
 I
 =
@@ -990,7 +992,7 @@ $$
 Для $dxdz , dydz$ определяется аналогично. 
 
 
-
+\newpage
 \subsection*{Формула Гаусса-Остроградского:}
 \textbf{Обозначаю: $R = R(x, y ,z) , Q = Q(x,y,z) , P = P(x,y,z)$;}
 
@@ -1037,14 +1039,71 @@ $$
 	
 \begin{figure}
 \begin{center}
-\includegraphics[width = 12cm]{Гаусс-Остроградский.jpg}
+\includegraphics[width = 10cm]{Гаусс-Остроградский.jpg}
 \caption{Упрощенный рисунок с $V$, элементарной по $Oz$}
 \end{center}
 \end{figure}
 
+Учитывая, что 
 
+$$
+\begin{cases}
+   f = u \\
+   g = v \\
+   h = \varphi(u,v)
+\end{cases}
+\Rightarrow
+\vec{n} = 
+\begin{vmatrix}
+\vec{i} & \vec{j} & \vec{k} \\
+(f_u = 1) & (g_u = 0) & h_u \\
+(f_v = 0) & (g_v = 1) & h_v 
+\end{vmatrix}
+=
+\-h_u \vec{i} - h_v \vec{j} + \vec{k}
+$$
+Отсюда:
+$$
+|\vec{n}| = \sqrt{1+h_u^2 + h_v^2}
+$$
 
+А значит:
+$$
+\vec{V} = ( ..., ... , \frac{1}{\sqrt{1+h_u^2 + h_v^2}})
+$$
+те $cos\gamma = \frac{1}{\sqrt{1+h_u^2 + h_v^2}} > 0$, $\gamma$ - острый, а значит $\vec{V}$ - внешняя нормаль к $S_1$
 
+Можно сделать вывод:
+$$
+\int\limits_{\Omega}\int R(x,y,\psi(x,y))dxdy = \int\limits_{S_2^+}\int R(x,y,z)dxdy
+$$
+$$
+\int\limits_{\Omega}\int R(x,y,\varphi(x,y))dxdy = -\int\limits_{S_1^+}\int R(x,y,z)dxdy
+$$
+По определению \hyperref[eq9]{поверхностного интеграла II рода}, учитывая то, что для $S_2^+$
+нормаль будет внешней, а для $S_1^+$ - внутренней, можно переписать наши поаерхностные интегралы II рода,
+как поверхностыные интегралы I рода:
+	$$\int\limits_{S_2^+}\int R(x,y,z)dxdy = \int\limits_{S_2^+} R(x,y,z)cos\gamma ds$$
+	$$\int\limits_{S_1^+}\int R(x,y,z)dxdy = \int\limits_{S_1^+} R(x,y,z)cos\gamma ds$$
+
+Тогда:
+$$
+\int\int\limits_{V}\int \frac{\partial R}{\partial z}dxdydz = \int\limits_{S_2^+} R(x,y,z)cos\gamma ds + 
+\int\limits_{S_0} R(x,y,z)cos\gamma ds - \int\limits_{S_1^+} R(x,y,z)cos\gamma ds =
+$$
+$$
+=
+\int\limits_{S} R(x,y,z)cos\gamma ds 
+$$
+, где $S_0$ - боковая поверхность(это интеграл равен нулю, тк $\gamma = 90$(нормаль к $S_0$ перпендикулярная $Oz$),а значит $cos\gamma = 0$ )
+
+Аналогично доказывается:
+$$
+\int\int\limits_{V}\int \frac{\partial P}{\partial x}dxdydz = \int\limits_{S} R(x,y,z)cos\alpha ds 
+$$
+$$
+\int\int\limits_{V}\int \frac{\partial Q}{\partial y}dxdydz = \int\limits_{S} R(x,y,z)cos\beta ds 
+$$
 \newpage
 \section{Полезности}
 \subsection*{Связная область}\label{eq4}
