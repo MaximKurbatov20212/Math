@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage{scrextend}
 \usepackage{graphicx}
 \usepackage{amssymb}
@@ -7,6 +7,9 @@
 \usepackage{amsmath}
 \usepackage{wrapfig}
 \usepackage{tocloft}
+
+
+
 \definecolor{linkcolor}{HTML}{002f55} % цвет ссылок
 \definecolor{urlcolor}{HTML}{002f55} % цвет гиперссылок
 \hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
@@ -996,7 +999,7 @@ $$
 \subsection*{Формула Гаусса-Остроградского:}
 \textbf{Обозначаю: $R = R(x, y ,z) , Q = Q(x,y,z) , P = P(x,y,z)$;}
 
-		Пусть $V$ есть ограниченная область из пространства $R^3$, и $V$ можно разбить кусочно-гладкими поверхностями на конечное число элементарных областей. Далее, пусть $P(x, y ,z)$, $Q(x, y ,z)$ и $R(x,y,z)$ есть заданные функции
+		Пусть $V$ есть ограниченная поверхность $\Omega$ область из пространства $R^3$, и $V$ можно разбить кусочно-гладкими поверхностями на конечное число элементарных областей. Далее, пусть $P(x, y ,z)$, $Q(x, y ,z)$ и $R(x,y,z)$ есть заданные функции
 такие, что 
 
 1)  $P$, $Q$ и $R$ непрерывны в замкнутой области $V$
@@ -1009,20 +1012,28 @@ $$
 $$
 \int\int\limits_{V}\int (\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z})dxdydz
 =
-\int\limits_{\delta V}\int (Pcos\alpha + Qcos\beta + Rcos\gamma)ds
+\int\limits_{S}\int (Pcos\alpha + Qcos\beta + Rcos\gamma)ds
 $$
-в которой $(cos\alpha, cos\beta, cos\gamma)$ есть направляющие косинусы вектора \textbf{внешней} нормали к границе $\delta V$ области $V$
+в которой $(cos\alpha, cos\beta, cos\gamma)$ есть направляющие косинусы вектора \textbf{внешней} нормали к границе $S$ области $V$
 
-\textit{Док-во для элементарной $\Omega$:}
+\includegraphics[width = 12cm]{Гаусс-Остроградский.jpg}
 
-	Коль $\Omega$ элементарна, значит и по $Oz$ элементарна, а значит
+\textit{Док-во для элементарной $V$:}
+
+	Поверхность $S$ можно представить как:
+	$S = S_0 \cup S_1^- \cup S_2^+$
+
+	Коль $V$ элементарна, значит и по $Oz$ элементарна, а значит
 	$\varphi(x,y) \leq z \leq \psi(x,y)$
+	
+
 
 	Рассмотрим 
 	$$\int\int\limits_{V}\int R_z(x,y,z)$$
 
 
-Тк $V$ элементарна по $Oz$:
+
+Тк $V$ элементарна по $Oz$: 
 $$
 \int\int\limits_{V}\int R_z(x,y,z) dxdxydz
 =
@@ -1034,23 +1045,101 @@ $$
 \int\limits_{\Omega}\int (R(x,y,\psi(x,y)) - R(x,y,\varphi(x,y)))dxdy
 $$
 
-Тк $\varphi(x,y) \leq z \leq \psi(x,y)$
+Тк 
 
+1)	$\varphi(x,y) \leq z \leq \psi(x,y)$ 
+
+2) $\vec{n_1}$ - внешний к $z = \psi(x)$ , но $\vec{n_2}$ - внутренний к $z = \varphi(x)$ (см. рис ниже)
+
+3)Факт: 
+
+4) \hyperref[eq10]{Почитайте это еще}
+
+\includegraphics[width = 18cm]{ГО.jpg}
+
+Можно сделать вывод:
+$$
+\int\limits_{\Omega}\int R(x,y,\psi(x,y))dxdy = \int\limits_{S_2^+}\int R(x,y,z)dxdy
+$$
+$$
+\int\limits_{\Omega}\int R(x,y,\varphi(x,y))dxdy = -\int\limits_{S_1^+}\int R(x,y,z)dxdy
+$$
+
+По определению \hyperref[eq9]{поверхностного интеграла II рода}, учитывая то, что для $S_2^+$
+нормаль будет внешней, а для $S_1^+$ - внутренней, можно переписать наши поверхностные интегралы II рода,
+как поверхностные интегралы I рода:
+	$$\int\limits_{S_2^+}\int R(x,y,z)dxdy = \int\limits_{S_2} R(x,y,z)cos\gamma ds$$
+	$$\int\limits_{S_1^+}\int R(x,y,z)dxdy = \int\limits_{S_1} R(x,y,z)cos\gamma ds$$
+
+Тогда, зная, что $S_0$ - боковая поверхность(это интеграл равен нулю, тк $\gamma = 90$(нормаль к $S_0$ перпендикулярная $Oz$),а значит $cos\gamma = 0$ ) можно сделать вывод:
+$$
+\int\int\limits_{V}\int \frac{\partial R}{\partial z}dxdydz = \int\limits_{S_2^+} R(x,y,z)cos\gamma ds + 
+\int\limits_{S_0} R(x,y,z)cos\gamma ds - \int\limits_{S_1^+} R(x,y,z)cos\gamma ds =
+$$
+$$
+=
+\int\limits_{S} R(x,y,z)cos\gamma ds 
+$$
+
+
+Аналогично доказывается:
+$$
+\int\int\limits_{V}\int \frac{\partial P}{\partial x}dxdydz = \int\limits_{S} R(x,y,z)cos\alpha ds 
+$$
+$$
+\int\int\limits_{V}\int \frac{\partial Q}{\partial y}dxdydz = \int\limits_{S} R(x,y,z)cos\beta ds 
+$$
+
+Суммируя, получаем нужную формулу.
+
+читд
+
+\textit{Док-во для V - составленной из гладких поверхностей:}
+
+	Пусть теперь область $V$ есть множество $V = V_1 \cap V_2 \cap S^* $, причем $V_1$
+и $V_2$ есть элементарные области, $S^* $ есть разделяющая их кусочно-гладкая
+поверхность. Представляя интеграл по области $V$ в виде суммы интегралов по областям $V_1$ и $V_2$ (что возможно вследствие свойства аддитивности
+тройного интеграла), применяя формулу \textbf{Гаусса-Остроградского для элементарной области} к каждой области $V_1$ и $V_2$,
+учитывая, что внешняя нормаль на поверхности $S^* $ направлена взаимно
+противоположно по отношению к областям $V_1$ и $V_2$, а также то, что оставшиеся части границ областей $V_1$ и $V_2$ составят вместе границу $V$, получим
+требуемую формулу  для составной области $V$.
+
+	Если область G составлена из более чем двух областей
+$V_1$ и $V_2$ и разделяющих их поверхностей, то рассуждения будут вполне
+аналогичны, и тем самым формула \textbf{Гаусса-Остроградского для элементарной области} будет справедлива и для такой
+области.
+
+
+
+
+
+
+
+\newpage
+\section{Полезности}
+\subsection*{Связная область}\label{eq4}
+Определение. Пусть задана область $E$, т.е. множество, состоящее из внутренних точек. Множество $E$ называется связным, если любые две точки этого
+множества можно соединить ломаной, целиком лежащей в этой области.
+
+\subsection*{Формула конечных приращений Лагранжа}\label{eq5}	
+Если функция $F$ непрерывна на отрезке $[a,b]$  и дифференцируема в интервале $(a,b)$, то найдётся такая точка $ c\in (a,b)$, что
+ 
+	$F(a) - F(b) = F'(c)(b - a)$
 	
-\begin{figure}
-\begin{center}
-\includegraphics[width = 10cm]{Гаусс-Остроградский.jpg}
-\caption{Упрощенный рисунок с $V$, элементарной по $Oz$}
-\end{center}
-\end{figure}
+	Можно записать так:
+	
+	$F(x + \Delta x) - F(x) = F'(x + \theta\Delta x)\Delta x , \theta \in (0,1) $
 
+\subsection*{Теорема о смешанных производных}\label{eq6}
+\includegraphics[width = 20cm]{CP.jpg}	
+
+\subsection*{Корректность нормали в т. Гаусса-Остроградского}\label{eq10}
 Учитывая, что 
-
 $$
 \begin{cases}
    f = u \\
    g = v \\
-   h = \varphi(u,v)
+   h = \psi(u,v)
 \end{cases}
 \Rightarrow
 \vec{n} = 
@@ -1070,57 +1159,10 @@ $$
 А значит:
 $$
 \vec{V} = ( ..., ... , \frac{1}{\sqrt{1+h_u^2 + h_v^2}})
-$$
-те $cos\gamma = \frac{1}{\sqrt{1+h_u^2 + h_v^2}} > 0$, $\gamma$ - острый, а значит $\vec{V}$ - внешняя нормаль к $S_1$
-
-Можно сделать вывод:
-$$
-\int\limits_{\Omega}\int R(x,y,\psi(x,y))dxdy = \int\limits_{S_2^+}\int R(x,y,z)dxdy
-$$
-$$
-\int\limits_{\Omega}\int R(x,y,\varphi(x,y))dxdy = -\int\limits_{S_1^+}\int R(x,y,z)dxdy
-$$
-По определению \hyperref[eq9]{поверхностного интеграла II рода}, учитывая то, что для $S_2^+$
-нормаль будет внешней, а для $S_1^+$ - внутренней, можно переписать наши поаерхностные интегралы II рода,
-как поверхностыные интегралы I рода:
-	$$\int\limits_{S_2^+}\int R(x,y,z)dxdy = \int\limits_{S_2^+} R(x,y,z)cos\gamma ds$$
-	$$\int\limits_{S_1^+}\int R(x,y,z)dxdy = \int\limits_{S_1^+} R(x,y,z)cos\gamma ds$$
-
-Тогда:
-$$
-\int\int\limits_{V}\int \frac{\partial R}{\partial z}dxdydz = \int\limits_{S_2^+} R(x,y,z)cos\gamma ds + 
-\int\limits_{S_0} R(x,y,z)cos\gamma ds - \int\limits_{S_1^+} R(x,y,z)cos\gamma ds =
-$$
-$$
 =
-\int\limits_{S} R(x,y,z)cos\gamma ds 
+( ..., ... , \frac{1}{\sqrt{1+\psi_x^2 + \psi_y^2}})
 $$
-, где $S_0$ - боковая поверхность(это интеграл равен нулю, тк $\gamma = 90$(нормаль к $S_0$ перпендикулярная $Oz$),а значит $cos\gamma = 0$ )
-
-Аналогично доказывается:
-$$
-\int\int\limits_{V}\int \frac{\partial P}{\partial x}dxdydz = \int\limits_{S} R(x,y,z)cos\alpha ds 
-$$
-$$
-\int\int\limits_{V}\int \frac{\partial Q}{\partial y}dxdydz = \int\limits_{S} R(x,y,z)cos\beta ds 
-$$
-\newpage
-\section{Полезности}
-\subsection*{Связная область}\label{eq4}
-Определение. Пусть задана область $E$, т.е. множество, состоящее из внутренних точек. Множество $E$ называется связным, если любые две точки этого
-множества можно соединить ломаной, целиком лежащей в этой области.
-
-\subsection*{Формула конечных приращений Лагранжа}\label{eq5}	
-Если функция $F$ непрерывна на отрезке $[a,b]$  и дифференцируема в интервале $(a,b)$, то найдётся такая точка $ c\in (a,b)$, что
- 
-	$F(a) - F(b) = F'(c)(b - a)$
-	
-	Можно записать так:
-	
-	$F(x + \Delta x) - F(x) = F'(x + \theta\Delta x)\Delta x , \theta \in (0,1) $
-
-\subsection*{Теорема о смешанных производных}\label{eq6}
-\includegraphics[width = 20cm]{CP.jpg}	
+те $cos\gamma = \frac{1}{\sqrt{1+h_u^2 + h_v^2}} = \frac{1}{\sqrt{1+\psi_x^2 + \psi_y^2}}> 0$, $\gamma$ - острый, а значит $\vec{V}$ - внешняя нормаль к $S_2$
 \end{document}
 
 
